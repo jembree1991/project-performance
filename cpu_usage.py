@@ -35,7 +35,7 @@ def __cpu_core(n: int) -> (str, int, int, int, int, int):
         cpu_line = line_number[cpu_check].split()
         cpu, user, nice, system, idle, iowait = (cpu_line[0], (cpu_line[1]), cpu_line[2], cpu_line[3],
                                                  cpu_line[4], cpu_line[5])
-        return cpu, int(user), int(nice), int(system), int(idle), int(iowait)
+        return str(cpu), int(user), int(nice), int(system), int(idle), int(iowait)
 
 
 def total_cpu_usage() -> float:
