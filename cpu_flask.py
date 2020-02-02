@@ -6,7 +6,7 @@ from memory_usage import *
 app = Flask(__name__)
 
 
-@app.route('/cpu/')
+@app.route('/v1/cpu/')
 def cpu():
     cpu_usage = {}
     cores = {}
@@ -17,7 +17,7 @@ def cpu():
     return jsonify(cpu_usage, cores)
 
 
-@app.route('/cpu/core/<core_number>/')
+@app.route('/v1/cpu/core/<core_number>/')
 def core_value(core_number):
     try:
         core_dict = {}
@@ -27,7 +27,7 @@ def core_value(core_number):
         abort(404)
 
 
-@app.route('/cpu/process/')
+@app.route('/v1/cpu/process/')
 def process_list():
     process_id, comm = process_dirs()
     processes_list = []
@@ -40,14 +40,14 @@ def process_list():
     return jsonify(all_processes)
 
 
-@app.route('/cpu/process/<pid>/')
+@app.route('/v1/cpu/process/<pid>/')
 def process(pid):
     process_dict = {}
     process_dict[pid] = per_process_usage(pid)
     return jsonify(process_dict)
 
 
-@app.route('/memory/')
+@app.route('/v1/memory/')
 def total_memory():
     memory = {}
     mem_percentage = total_mem_usage()
@@ -55,7 +55,7 @@ def total_memory():
     return jsonify(memory)
 
 
-@app.route('/memory/<pid>/')        #TODO: Math seems wrong somewhere
+@app.route('/v1/memory/<pid>/')
 def mem_per_process(pid):
     mem_process = {}
     process_percentage = mem_process_usage(pid)

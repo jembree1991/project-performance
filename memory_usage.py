@@ -23,12 +23,12 @@ def __mem_per_process(pid: int) -> int:
 def total_mem_usage():
     mem_total, mem_available = __mem_usage()
     mem_used = mem_total - mem_available
-    mem_percentage = mem_used / mem_total
+    mem_percentage = (mem_used / mem_total) * 100
     return mem_percentage
 
 
 def mem_process_usage(pid):
     mem_total = __mem_usage()[0]
     vm_rss = __mem_per_process(pid)
-    process_percentage = vm_rss / mem_total
+    process_percentage = (vm_rss / mem_total) * 100
     return process_percentage
